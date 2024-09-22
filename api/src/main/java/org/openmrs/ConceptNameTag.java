@@ -1,6 +1,6 @@
 /**
  * This Source Code Form is subject to the terms of the Mozilla Public License,
- * v. 2.0. If a copy of the MPL was not distributed with this file, you can
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
  *
@@ -10,6 +10,7 @@
 package org.openmrs;
 
 import java.util.Date;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.envers.Audited;
 
@@ -17,34 +18,46 @@ import org.hibernate.envers.Audited;
  * ConceptNameTag is a textual tag which can be applied to a ConceptName.
  */
 @Audited
-public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, java.io.Serializable {
+public class ConceptNameTag extends BaseOpenmrsObject implements Auditable, Voidable, java.io.Serializable {
 	
 	public static final long serialVersionUID = 33226787L;
 	
 	// Fields
-	private Integer conceptNameTagId; // Unique identifier for the ConceptNameTag
-	private String tag; // The textual representation of the tag
-	private String description; // Description of the tag
-	private User creator; // User who created this tag
-	private Date dateCreated; // Date when this tag was created
-	private Boolean voided = false; // Indicates if the tag is voided
-	private User voidedBy; // User who voided this tag
-	private Date dateVoided; // Date when this tag was voided
-	private String voidReason; // Reason for voiding the tag
-	private User changedBy; // User who last changed this tag
-	private Date dateChanged; // Date when this tag was last changed
+	private Integer conceptNameTagId;
+	
+	private String tag;
+	
+	private String description;
+	
+	private User creator;
+	
+	private Date dateCreated;
+	
+	private Boolean voided = false;
+	
+	private User voidedBy;
+	
+	private Date dateVoided;
+	
+	private String voidReason;
+	
+	private User changedBy;
+	
+	private Date dateChanged;
 	
 	// Constructors
 	
-	/** Default constructor. */
+	/**
+	 * Default constructor.
+	 */
 	public ConceptNameTag() {
 	}
 	
 	/**
-	 * Public constructor to initialize a tag and its description.
+	 * Public constructor. Use factory methods to obtain copies of the desired tags.
 	 * 
-	 * @param tag the textual representation of the tag
-	 * @param description the description of the tag
+	 * @param tag
+	 * @param description
 	 */
 	public ConceptNameTag(String tag, String description) {
 		setTag(tag);
@@ -63,9 +76,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the textual representation of this ConceptNameTag.
+	 * Sets the textual representation of this ConceptNametag.
 	 * 
-	 * @param tag the textual representation to set
+	 * @param tag the textual representation
 	 */
 	public void setTag(String tag) {
 		this.tag = tag;
@@ -83,16 +96,14 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	/**
 	 * Sets the description of this tag.
 	 * 
-	 * @param description the description to set
+	 * @param description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	
-	/** 
-	 * Returns the creator of this tag.
-	 * 
-	 * @return the creator
+	/**
+	 * @return Returns the creator.
 	 */
 	@Override
 	public User getCreator() {
@@ -100,19 +111,15 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the creator of this tag.
-	 * 
-	 * @param creator the creator to set
+	 * @param creator The creator to set.
 	 */
 	@Override
 	public void setCreator(User creator) {
 		this.creator = creator;
 	}
 	
-	/** 
-	 * Returns the date this tag was created.
-	 * 
-	 * @return the date created
+	/**
+	 * @return Returns the dateCreated.
 	 */
 	@Override
 	public Date getDateCreated() {
@@ -120,9 +127,7 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the date this tag was created.
-	 * 
-	 * @param dateCreated the date created to set
+	 * @param dateCreated The dateCreated to set.
 	 */
 	@Override
 	public void setDateCreated(Date dateCreated) {
@@ -130,10 +135,11 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Returns whether the tag has been voided.
+	 * Returns whether the ConceptName has been voided.
 	 * 
-	 * @return true if the tag has been voided, false otherwise
-	 * @deprecated as of 2.0, use {@link #getVoided()} instead
+	 * @return true if the ConceptName has been voided, false otherwise.
+	 * 
+	 * @deprecated as of 2.0, use {@link #getVoided()}
 	 */
 	@Override
 	@Deprecated
@@ -143,9 +149,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Returns whether the tag has been voided.
+	 * Returns whether the ConceptName has been voided.
 	 * 
-	 * @return true if the tag has been voided, false otherwise
+	 * @return true if the ConceptName has been voided, false otherwise.
 	 */
 	@Override
 	public Boolean getVoided() {
@@ -153,9 +159,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the voided status of the tag.
+	 * Sets the voided status of the ConceptName.
 	 * 
-	 * @param voided the voided status to set
+	 * @param voided the voided status to set.
 	 */
 	@Override
 	public void setVoided(Boolean voided) {
@@ -163,9 +169,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Returns the User who voided this tag.
+	 * Returns the User who voided this ConceptName.
 	 * 
-	 * @return the User who voided this tag, or null if not set
+	 * @return the User who voided this ConceptName, or null if not set
 	 */
 	@Override
 	public User getVoidedBy() {
@@ -173,9 +179,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the User who voided this tag.
+	 * Sets the User who voided this ConceptName.
 	 * 
-	 * @param voidedBy the user who voided this tag
+	 * @param voidedBy the user who voided this ConceptName.
 	 */
 	@Override
 	public void setVoidedBy(User voidedBy) {
@@ -183,9 +189,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Returns the Date this tag was voided.
+	 * Returns the Date this ConceptName was voided.
 	 * 
-	 * @return the Date this tag was voided
+	 * @return the Date this ConceptName was voided.
 	 */
 	@Override
 	public Date getDateVoided() {
@@ -193,9 +199,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the Date this tag was voided.
+	 * Sets the Data this ConceptName was voided.
 	 * 
-	 * @param dateVoided the date this tag was voided
+	 * @param dateVoided the date the ConceptName was voided.
 	 */
 	@Override
 	public void setDateVoided(Date dateVoided) {
@@ -203,9 +209,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Returns the reason this tag was voided.
+	 * Returns the reason this ConceptName was voided.
 	 * 
-	 * @return the reason this tag was voided
+	 * @return the reason this ConceptName was voided
 	 */
 	@Override
 	public String getVoidReason() {
@@ -213,9 +219,9 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the reason this tag was voided.
+	 * Sets the reason this ConceptName was voided.
 	 * 
-	 * @param voidReason the reason this tag was voided
+	 * @param voidReason the reason this ConceptName was voided
 	 */
 	@Override
 	public void setVoidReason(String voidReason) {
@@ -224,12 +230,10 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	
 	@Override
 	public String toString() {
-		return this.tag; // Returns the tag as a string representation
+		return this.tag;
 	}
 	
 	/**
-	 * Returns the conceptNameTagId.
-	 * 
 	 * @return the conceptNameTagId
 	 */
 	public Integer getConceptNameTagId() {
@@ -237,8 +241,6 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the conceptNameTagId.
-	 * 
 	 * @param conceptNameTagId the conceptNameTagId to set
 	 */
 	public void setConceptNameTagId(Integer conceptNameTagId) {
@@ -264,9 +266,7 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Returns the User who changed this tag.
-	 * 
-	 * @return the changedBy
+	 * @return Returns the changedBy.
 	 */
 	@Override
 	public User getChangedBy() {
@@ -274,9 +274,7 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the User that changed this tag.
-	 * 
-	 * @param changedBy the user that changed this tag
+	 * @param changedBy The user that changed this object
 	 */
 	@Override
 	public void setChangedBy(User changedBy) {
@@ -284,9 +282,7 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Returns the date this tag was last changed.
-	 * 
-	 * @return the date this tag was changed
+	 * @return Returns the date this object was changed
 	 */
 	@Override
 	public Date getDateChanged() {
@@ -294,9 +290,7 @@ public class ConceptNameTag extends BaseConcept implements Auditable, Voidable, 
 	}
 	
 	/**
-	 * Sets the date this tag was last changed.
-	 * 
-	 * @param dateChanged the date this tag was changed
+	 * @param dateChanged The date this object was changed
 	 */
 	@Override
 	public void setDateChanged(Date dateChanged) {
