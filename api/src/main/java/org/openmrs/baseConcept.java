@@ -1,18 +1,62 @@
-package org.openmrs;
-
-import java.util.Date;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-public abstract class BaseConcept extends BaseOpenmrsObject implements Auditable, Voidable, java.io.Serializable {
-
+public class ConceptName extends BaseOpenmrsObject implements Auditable, Voidable, java.io.Serializable {
+    // Fields
+    private Integer conceptNameId;
+    private String name;
+    private Locale locale;
     private User creator;
     private Date dateCreated;
     private Boolean voided = false;
     private User voidedBy;
     private Date dateVoided;
     private String voidReason;
-    private User changedBy;
-    private Date dateChanged;
+
+    // Constructors
+    public ConceptName(Integer conceptNameId) {
+        this.conceptNameId = conceptNameId;
+    }
+
+    public ConceptName(String name, Locale locale) {
+        setName(name);
+        setLocale(locale);
+    }
+
+    // Property accessors
+    public Integer getConceptNameId() {
+        return conceptNameId;
+    }
+
+    public void setConceptNameId(Integer conceptNameId) {
+        this.conceptNameId = conceptNameId;
+    }
+
+    public Concept getConcept() {
+        return concept;
+    }
+
+    public void setConcept(Concept concept) {
+        this.concept = concept;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name != null && StringUtils.isBlank(name) && StringUtils.isNotBlank(this.name)
+                && this.getConceptNameType().equals(ConceptNameType.SHORT)) {
+            this.setVoided(true);
+        } else {
+            this.name = name;
+        }
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
 
     @Override
     public User getCreator() {
@@ -32,6 +76,12 @@ public abstract class BaseConcept extends BaseOpenmrsObject implements Auditable
     @Override
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    @Override
+    @JsonIgnore
+    public Boolean isVoided() {
+        return getVoided();
     }
 
     @Override
@@ -74,23 +124,7 @@ public abstract class BaseConcept extends BaseOpenmrsObject implements Auditable
         this.voidReason = voidReason;
     }
 
-    @Override
-    public User getChangedBy() {
-        return changedBy;
-    }
-
-    @Override
-    public void setChangedBy(User changedBy) {
-        this.changedBy = changedBy;
-    }
-
-    @Override
-    public Date getDateChanged() {
-        return dateChanged;
-    }
-
-    @Override
-    public void setDateChanged(Date dateChanged) {
-        this.dateChanged = dateChanged;
+    public Collection<ConceptNameTag> getTags() {
+        // Implementation for getting tags
     }
 }
